@@ -17,14 +17,17 @@ Ext.define('SistemInformasiNilai.controller.jurusanController', {
     extend: 'Ext.app.Controller',
 
     onPanelShow: function(component, eOpts) {
+        // read all data 
         Ext.getStore('JsonStoreJurusan').load();
     },
 
     ontnTambahJurusan: function(button, e, eOpts) {
+        // show popup input box to input new data
         Ext.widget('window_jurusan').show();
     },
 
     onBtnEditJurusan: function(button, e, eOpts) {
+        // show popup input box with old data then update it
         var win = Ext.widget('window_jurusan').show();
         var grid = Ext.ComponentQuery.query('#tabelJurusan')[0];
         var selection = grid.getSelectionModel().getSelection()[0];
@@ -34,6 +37,7 @@ Ext.define('SistemInformasiNilai.controller.jurusanController', {
     },
 
     onBtnHapusJurusan: function(button, e, eOpts) {
+        // delete data
         var hapus = function(btn) {
             if(btn == 'yes'){
                 var grid = Ext.ComponentQuery.query('#tabelJurusan')[0];
@@ -77,6 +81,7 @@ Ext.define('SistemInformasiNilai.controller.jurusanController', {
             }
         };
         Ext.MessageBox.show({
+            // validate if you realy want to delete this data
             title:'Peringatan hapus',
             msg:"Apa yakin?",
             buttons: Ext.MessageBox.YESNO,
@@ -87,6 +92,7 @@ Ext.define('SistemInformasiNilai.controller.jurusanController', {
     },
 
     onGridpanelSelectionChange: function(model, selected, eOpts) {
+        // update style on some buttons then load data from kelas
         Ext.ComponentQuery.query('#btnEditJurusan')[0].setDisabled(false);
         Ext.ComponentQuery.query('#btnHapusJurusan')[0].setDisabled(false);
 
@@ -97,6 +103,7 @@ Ext.define('SistemInformasiNilai.controller.jurusanController', {
     },
 
     onBtnWindowJurusanBatal: function(button, e, eOpts) {
+        // close popup
         button.up('window').close();
     },
 

@@ -1,3 +1,4 @@
+//saya rekomendasikan untuk menggunakan database builder seperti faker agar lebih mudah kedepannya
 INSERT INTO tb_siswa (Nis_, NamaSiswa_, Alamat_, IDKelas_, IDJur_) VALUES
 ('25410', 'I Gusti Bagus Finan Aditya', 'Denpasar', '8', '5'),
 ('25411', 'I Putu Gede Nopa Penariadi', 'Denpasar', '8', '5'),

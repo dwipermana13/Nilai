@@ -23,11 +23,13 @@ Ext.define('SistemInformasiNilai.controller.homeController', {
             success: function(response) {
                 console.log(response.responseText);
                 response = Ext.decode(response.responseText);
+                // mengambil jumlah data dari api untuk ditampilkan dalam dashboard (karena tidak menggunakan looping) 
                 var jmlhKelas = response.ValueKelas_;
                 var jmlhJur = response.ValueJur_;
                 var jmlhMapel = response.ValueMapel_;
                 var jmlhSiswa = response.ValueSiswa_;
 
+                // data yang tadi diambil langsung digunakan untuk mengupdate nilai dari kolom di dashboard
                 Ext.ComponentQuery.query('#txtValueKelas')[0].setText(jmlhKelas);
                 Ext.ComponentQuery.query('#txtValueJurusan')[0].setText(jmlhJur);
                 Ext.ComponentQuery.query('#txtValueMapel')[0].setText(jmlhMapel);
@@ -37,17 +39,20 @@ Ext.define('SistemInformasiNilai.controller.homeController', {
 
         //chart
         // Ext.getStore('StoreChartHome').load();
+        // langsung menampilkan beberapa chart
         Ext.getStore('StoreChartColumn').load();
         Ext.getStore('StoreChartPie').load();
         Ext.getStore('JsonStoreMapel').load();
     },
 
     onGridpanelSelectionChange: function(model, selected, eOpts) {
+            //update style pada button ketika row nya terselect 
             Ext.ComponentQuery.query('#btnEditMapel')[0].setDisabled(false);
             Ext.ComponentQuery.query('#btnHapusMapel')[0].setDisabled(false);
     },
 
     onBtnRefreshMapel: function(button, e, eOpts) {
+        // untuk update style ketika page refresh (row tak terselect, btn disabled, read new data)
         Ext.ComponentQuery.query('#tabelMapel')[0].getSelectionModel().clearSelections();
         Ext.ComponentQuery.query('#btnEditMapel')[0].setDisabled(true);
         Ext.ComponentQuery.query('#btnHapusMapel')[0].setDisabled(true);

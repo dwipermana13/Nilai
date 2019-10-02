@@ -17,14 +17,17 @@ Ext.define('SistemInformasiNilai.controller.kelasController', {
     extend: 'Ext.app.Controller',
 
     onPanelShow: function(component, eOpts) {
+        // read all data 
         Ext.getStore('JsonStoreKelas').load();
     },
 
     onBtnTambahKelas: function(button, e, eOpts) {
+        // show popup input box to input new data
         Ext.widget('window_kelas').show();
     },
 
     onBtnEditKelas: function(button, e, eOpts) {
+        // show popup input box with old data then update it
         var win = Ext.widget('window_kelas').show();
         var grid = Ext.ComponentQuery.query('#tabelKelas')[0];
         var selection = grid.getSelectionModel().getSelection()[0];
@@ -79,6 +82,7 @@ Ext.define('SistemInformasiNilai.controller.kelasController', {
     },
 
     onBtnHapusKelas: function(button, e, eOpts) {
+        // delete data
         var hapus = function(btn) {
             if(btn == 'yes'){
                 var grid = Ext.ComponentQuery.query('#tabelKelas')[0];
@@ -112,6 +116,7 @@ Ext.define('SistemInformasiNilai.controller.kelasController', {
             }
         };
         Ext.MessageBox.show({
+            // validate if you realy want to delete this data
             title:'Peringatan hapus',
             msg:"Apa yakin?",
             buttons: Ext.MessageBox.YESNO,
@@ -122,10 +127,12 @@ Ext.define('SistemInformasiNilai.controller.kelasController', {
     },
 
     onBtnWindowKelasBatal: function(button, e, eOpts) {
+        // close popup
         button.up('window').close();
     },
 
     onGridpanelSelectionChange: function(model, selected, eOpts) {
+        // update style on some buttons then load data from jurusan
             Ext.ComponentQuery.query('#btnEditKelas')[0].setDisabled(false);
             Ext.ComponentQuery.query('#btnHapusKelas')[0].setDisabled(false);
 
